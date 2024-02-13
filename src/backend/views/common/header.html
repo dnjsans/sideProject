@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html>
+	<head lang="en">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="Hetajs">
+		<meta name="author" content="WonJ">
+		<!-- <meta name="google" value="notranslate" /> -->
+		<title>HetaJs</title>
+
+		<link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+
+		<link rel="icon" type="image/png" href="/img/ui/favicon.png?v=8">
+
+
+		
+		<!-- Optional JavaScript -->
+	    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
+
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<!-- <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+		<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+		<script src="/bower_components/jquery-ui/jquery-ui-1.10.4.custom.min.js"></script>
+		<link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+		
+	
+		<!-- <link href="/bower_components/jquery-ui-bootstrap/jquery.ui.theme.css" rel="stylesheet">
+		<link href="/bower_components/jquery-ui/themes/rainingchain/jquery-ui.css" rel="stylesheet"> -->
+			
+        
+		<link rel="stylesheet" href="/css/CSSTableGenerator.css" type="text/css" />
+		<link rel="stylesheet" href="/css/button.css" type="text/css" />
+	  
+	
+	<!--  	
+		<script  src="https://code.jquery.com/jquery-3.5.1.js"  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="  crossorigin="anonymous"></script>
+	-->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.11/ace.js" integrity="sha256-Kr5Mbwq/xwJYw6XU4NR519/iosGvECYMyMU8IZ/rQok=" crossorigin="anonymous"></script>
+		
+		
+		<!-- GUI -->
+		<!-- <script type='text/javascript' src='/js/gui/colorpicker.js'></script>
+		<link href='/css/gui/colorpicker.css'  type='text/css' rel='stylesheet'/> -->
+	  
+		<script>
+			$(window).on('load', function(){
+				/* jQuery 를 이용한 Selector 부분입니다. 
+		           필요에 따라 아래 부분 특히 pre[class] 부분을 바꺼야 해당 code block을 찾을 수 있을 겁니다*/
+
+				// $('pre[class]').each(function(){ 
+		        // try {
+				// 	// 언어식별자를 SyntaxHighlight 처럼 "brush: 언어" 형태로 쓸때 식별을 위한 처리부분
+				// 	var lang = String($(this).attr("class")).match(/brush\:([ a-zA-Z_]*)\;?/)[1];
+				// 	lang = lang.trim().replace(/^js$/i, "javascript");
+				// 	// Ace 플러그인 반영 부분
+				// 	var editor = ace.edit(this);
+				// 	editor.setOptions({
+		        //     	maxLines: Infinity, // 줄 전체를 표시 
+		        //         // highlightActiveLine: true, // 현재 행에 하이라이트 표시(tomorrow 테마에서 동작)
+		        //         // theme: 'ace/theme/tomorrow' // 표시 테마 (아래와 같이 setTheme로도 가능)
+				// 	});
+				// 	editor.setTheme("ace/theme/monokai");      // 테마설정 부분이에요. 원하는걸로 바꾸세요
+				// 	editor.getSession().setMode("ace/mode/"+ lang); // 앞서 "brush:언어" 부분으로 언어 세팅
+				// 	editor.setShowInvisibles(false);            // 탭이나 공백, 엔터 기호를 보여줍니다.
+				// 	editor.setReadOnly(true);                  // 읽기전용으로 보여줍니다.
+				// 	editor.setShowPrintMargin(false);          // 프린트 가이드라인을 보여줍니다 (비활성화)
+				// 	editor.session.setUseWorker(false);// 코드에 대한 경고표시 여부(false시에 경고표시 비표시)
+				// 	} catch(ex) { console.info (ex) } 
+		        // });
+				$('pre').each(function(){ 
+		        try {
+					var editor = ace.edit(this);
+					editor.setOptions({
+		            	maxLines: Infinity, // 줄 전체를 표시 
+		                // highlightActiveLine: true, // 현재 행에 하이라이트 표시(tomorrow 테마에서 동작)
+		                // theme: 'ace/theme/tomorrow' // 표시 테마 (아래와 같이 setTheme로도 가능)
+					});
+					editor.setTheme("ace/theme/monokai");      // 테마설정 부분이에요. 원하는걸로 바꾸세요
+					editor.getSession().setMode("ace/mode/javascript"); // 앞서 "brush:언어" 부분으로 언어 세팅
+					editor.setShowInvisibles(false);            // 탭이나 공백, 엔터 기호를 보여줍니다.
+					editor.setReadOnly(true);                  // 읽기전용으로 보여줍니다.
+					editor.setShowPrintMargin(false);          // 프린트 가이드라인을 보여줍니다 (비활성화)
+					editor.session.setUseWorker(false);// 코드에 대한 경고표시 여부(false시에 경고표시 비표시)
+					} catch(ex) { console.info (ex) } 
+		        });
+			});
+		</script>
+		<style>
+			/* Google Font Link */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins" , sans-serif;
+}
+.sidebar{
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 78px;
+  background: #11101D;
+  padding: 6px 14px;
+  z-index: 99;
+  transition: all 0.5s ease;
+}
+.sidebar.open{
+  width: 250px;
+}
+.sidebar .logo-details{
+  height: 60px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.sidebar .logo-details .icon{
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+.sidebar .logo-details .logo_name{
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+.sidebar.open .logo-details .icon,
+.sidebar.open .logo-details .logo_name{
+  opacity: 1;
+}
+.sidebar .logo-details #btn{
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  font-size: 22px;
+  transition: all 0.4s ease;
+  font-size: 23px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+.sidebar.open .logo-details #btn{
+  text-align: right;
+}
+.sidebar i{
+  color: #fff;
+  height: 60px;
+  min-width: 50px;
+  font-size: 28px;
+  text-align: center;
+  line-height: 60px;
+}
+.sidebar .nav-list{
+  margin-top: 20px;
+  height: 100%;
+}
+.sidebar li{
+  position: relative;
+  margin: 8px 0;
+  list-style: none;
+}
+.sidebar li .tooltip{
+  position: absolute;
+  top: -20px;
+  left: calc(100% + 15px);
+  z-index: 3;
+  background: #fff;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: 400;
+  opacity: 0;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: 0s;
+}
+.sidebar li:hover .tooltip{
+  opacity: 1;
+  pointer-events: auto;
+  transition: all 0.4s ease;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.sidebar.open li .tooltip{
+  display: none;
+}
+.sidebar input{
+  font-size: 15px;
+  color: #FFF;
+  font-weight: 400;
+  outline: none;
+  height: 50px;
+  width: 100%;
+  width: 50px;
+  border: none;
+  border-radius: 12px;
+  transition: all 0.5s ease;
+  background: #1d1b31;
+}
+.sidebar.open input{
+  padding: 0 20px 0 50px;
+  width: 100%;
+}
+.sidebar .bx-search{
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  font-size: 22px;
+  background: #1d1b31;
+  color: #FFF;
+}
+.sidebar.open .bx-search:hover{
+  background: #1d1b31;
+  color: #FFF;
+}
+.sidebar .bx-search:hover{
+  background: #FFF;
+  color: #11101d;
+}
+.sidebar li a{
+  display: flex;
+  height: 100%;
+  width: 100%;
+  border-radius: 12px;
+  align-items: center;
+  text-decoration: none;
+  transition: all 0.4s ease;
+  background: #11101D;
+}
+.sidebar li a:hover{
+  background: #FFF;
+}
+.sidebar li a.active{
+  background: #FFF;
+}
+.sidebar li a .links_name{
+  color: #fff;
+  font-size: 15px;
+  font-weight: 400;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.4s;
+}
+.sidebar.open li a .links_name{
+  opacity: 1;
+  pointer-events: auto;
+}
+.sidebar li a:hover .links_name,
+.sidebar li a:hover i{
+  transition: all 0.5s ease;
+  color: #11101D;
+}
+.sidebar li a.active i{
+  transition: all 0.5s ease;
+  color: #11101D;
+}
+.sidebar li i{
+  height: 50px;
+  line-height: 50px;
+  font-size: 18px;
+  border-radius: 12px;
+}
+.sidebar li.profile{
+  position: fixed;
+  height: 60px;
+  width: 78px;
+  left: 0;
+  bottom: -8px;
+  padding: 10px 14px;
+  background: #1d1b31;
+  transition: all 0.5s ease;
+  overflow: hidden;
+}
+.sidebar.open li.profile{
+  width: 250px;
+}
+.sidebar li .profile-details{
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+.sidebar li img{
+  height: 45px;
+  width: 45px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-right: 10px;
+}
+.sidebar li.profile .name,
+.sidebar li.profile .job{
+  font-size: 15px;
+  font-weight: 400;
+  color: #fff;
+  white-space: nowrap;
+}
+.sidebar li.profile .job{
+  font-size: 12px;
+}
+.sidebar .profile #log_out{
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  background: #1d1b31;
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  border-radius: 0px;
+  transition: all 0.5s ease;
+}
+.sidebar.open .profile #log_out{
+  width: 50px;
+  background: none;
+}
+.home-section{
+  position: relative;
+  background: #E4E9F7;
+  min-height: 100vh;
+  top: 0;
+  left: 78px;
+  width: calc(100% - 78px);
+  transition: all 0.5s ease;
+  z-index: 2;
+}
+.sidebar.open ~ .home-section{
+  left: 250px;
+  width: calc(100% - 250px);
+}
+.home-section .text{
+  display: inline-block;
+  color: #11101d;
+  font-size: 25px;
+  font-weight: 500;
+  margin: 18px
+}
+@media (max-width: 420px) {
+  .sidebar li .tooltip{
+    display: none;
+  }
+}
+
+		</style>
+	</head>
+	<body>
+		<div class="sidebar">
+		  <div class="logo-details">
+			<i class='bx bx-meteor icon'></i>
+			  <div class="logo_name"><a href="/">HetaJs</a></div>
+			  <i class='bx bx-menu' id="btn" ></i>
+		  </div>
+		  <ul class="nav-list">
+			<li>
+				<i class='bx bx-search' ></i>
+			   <input type="text" placeholder="Search...">
+			   <span class="tooltip">Search</span>
+			</li>
+			<li>
+			  <a href="#">
+				<i class='bx bx-grid-alt'></i>
+				<span class="links_name">Dashboard</span>
+			  </a>
+			   <span class="tooltip">Dashboard</span>
+			</li>
+			<li>
+			 <a href="#">
+			   <i class='bx bx-user' ></i>
+			   <span class="links_name">User</span>
+			 </a>
+			 <span class="tooltip">User</span>
+		   </li>
+		   <li>
+			 <a href="/test/getTexts" class="<%- ['test'].indexOf(locals.location) !== -1 ? 'active' : ''%>">
+			   <i class="bx bx-chat" ></i>
+			   <span class="links_name">Test List</span>
+			 </a>
+			 <span class="tooltip">Test List</span>
+		   </li>
+
+		   <li>
+			 <a href="/test/insertText">
+			   <i class="bx bx-pie-chart-alt-2" ></i>
+			   <span class="links_name">Insert Text</span>
+			 </a>
+			 <span class="tooltip">Insert Text</span>
+		   </li>
+		   <li>
+			 <a href="#">
+			   <i class="bx bx-folder" ></i>
+			   <span class="links_name">Heta </span>
+			 </a>
+			 <span class="tooltip">Heta </span>
+		   </li>
+		   <li>
+			 <a href="#">
+			   <i class="bx bx-cart-alt" ></i>
+			   <span class="links_name">Order</span>
+			 </a>
+			 <span class="tooltip">Order</span>
+		   </li>
+		   <li>
+			 <a href="#">
+			   <i class='bx bx-heart' ></i>
+			   <span class="links_name">Saved</span>
+			 </a>
+			 <span class="tooltip">Saved</span>
+		   </li>
+		   <li>
+			 <a href="#">
+			   <i class='bx bx-cog' ></i>
+			   <span class="links_name">Setting</span>
+			 </a>
+			 <span class="tooltip">Setting</span>
+
+		   </li>
+		   <li class="profile">
+				<% if( !locals.nickname ) { %>
+				<div class="profile-details">
+					<span>Join now. </span>
+					<div class="name_job">
+						<a href="/account/join"><i class='bx bx-join' ></i></a>
+					</div>
+				</div>
+				<a href="/account/login"><i class='bx bx-log-in' id="log_out" ></i></a>
+				<% } else { %>
+				<div class="profile-details">
+					<span>Hello. </span>
+					<div class="name_job">
+						<div class="name"><%= locals.nickname %></div>
+						<!-- <div class="job"><%= locals.nickname %></div> -->
+					</div>
+				</div>
+				<a href="/account/logout"><i class='bx bx-log-out' id="log_out" ></i></a>
+				<% } %>
+		   </li>
+		  </ul>
+		</div>
+<script>
+	let sidebar = document.querySelector(".sidebar");
+	let closeBtn = document.querySelector("#btn");
+	let searchBtn = document.querySelector(".bx-search");
+
+	closeBtn.addEventListener("click", ()=>{
+	sidebar.classList.toggle("open");
+	menuBtnChange();//calling the function(optional)
+	});
+
+	searchBtn.addEventListener("click", ()=>{ // Sidebar open when you click on the search iocn
+	sidebar.classList.toggle("open");
+	menuBtnChange(); //calling the function(optional)
+	});
+
+	// following are the code to change sidebar button(optional)
+	function menuBtnChange() {
+	if(sidebar.classList.contains("open")){
+	closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");//replacing the iocns class
+	}else {
+	closeBtn.classList.replace("bx-menu-alt-right","bx-menu");//replacing the iocns class
+	}
+	}
+</script>
+
+		<section class="home-section">
+			<div class="text"><a href="/">HetaJs</a></div>
+			<div class="dropdown">
+				<% if(['hetalab','hetalab2','hetagame','other'].indexOf(locals.location) !== -1 ){ %>
+				<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				  Menus
+				</button>
+				<% } %>
+				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+					<% if(['hetalab2'].indexOf(locals.location) !== -1 ){ %>
+						<li><a href="/hetalab2/socketChatting">체팅 rooms</a></li>
+						<li><a href="/hetalab2/socketBatch">소캣 배치 테스트</a></li>
+						<li><a href="/hetalab2/webRTC">webRTC</a></li>
+						<li><a href="/hetalab2/webRTCmulti">webRTC multi</a></li>
+						<li><a href="#">-------------</a></li>
+						<li><a target="_blank" href="/express/listUser">[db용]Express 유저관리 게시판 </a></li>
+						<li><a href="/vue/1_vue">[db용]vue 테스트</a></li>
+					<% } %>
+					<% if(['hetalab'].indexOf(locals.location) !== -1 ){ %>
+						<li><a href="/hetalab/0_lines">0. Line</a></li>
+						<li><a href="/hetalab/0_spline">0. Spline</a></li>
+						<li><a href="/hetalab/1_triangle">1. Triangle</a></li>
+						<li><a href="/hetalab/2_cube">2. Cube</a></li>
+						<li><a href="/hetalab/3_texturedCube">3. texturedCube</a></li>
+						<li><a href="/hetalab/4_loader">4. Loader</a></li>
+						<li><a href="/hetalab/5_phonglight">5. Phong Light</a></li>
+						<li><a href="#">-------------</a></li>
+						<li><a href="/hetalab/6_fragmentShader">6. Fragment Mandelbrot</a></li>
+						<li><a href="#">-------------</a></li>
+						<li><a href="/hetalab/7_shadowMapping">7. Shadow Mapping</a></li>
+						<li><a href="/hetalab/8_animationMap">8. Animation Mapping</a></li>
+						<li><a href="/hetalab/9_animationMap2">9. Animation Mapping2</a></li>
+					<% } %>
+					<% if(['hetagame','hetaquest'].indexOf(locals.location) !== -1 ){ %>
+						<li><a href="/hetagame/0_Workflow2D">Workflow</a></li>
+						<li><a href="/hetagame/0_Workflow2D_view">Workflow view</a></li>
+						<li><a href="/hetagame/1_fps">1. Fps</a></li>
+						<li><a href="/hetagame/2_socket">2. Socket</a></li>
+						<li><a href="/hetagame/3_tileMap">3. Tilemap</a></li>
+						<li><a href="/hetagame/4_tileMap2">4. Tilemap2</a></li>
+						<li><a href="/hetagame/5_camera">5. Camer2D</a></li>
+						<li><a href="/hetagame/6_hetaQeust">6. hetaQeust 1</a></li>
+						<li><a href="/hetagame/webRTC">webRTC</a></li>
+						<li><a href="#">-------------</a></li>
+						<li><a href="/hetaquest/clipboardCopyImage">클립보드 이미지</a></li>
+						<li><a href="/hetaquest/editor2D">Editor2D 예제</a></li>
+						<li><a href="/hetaquest/webEditor">워크 플로우 Web Editor 버전</a></li>
+					<% } %>
+					<% if(['other'].indexOf(locals.location) !== -1 ){ %>
+						<li><a target="_blank" href="/others/virtualScroll"> Virtual Scroll Js</a></li>
+						<li><a target="_blank" href="/others/javaMybatisGetQuery">[java] Mybatis getQuery </a></li>
+						<li><a target="_blank" href="/others/tableColumnMover"> Table Header 간격 </a></li>
+						<li><a target="_blank" href="/others/dragTooltip"> Drag Tooltip 팝업조회</a></li>
+						<li><a target="_blank" href="/others/caret"> 캐럿 selection 저장/로드</a></li>
+						<li><a target="_blank" href="/others/zooming"> Zoom관련 JS</a></li>
+						<li><a target="_blank" href="/others/noiseMap"> Noise Map</a></li>
+						<li><a target="_blank" href="/others/spline3D"> Spline 3D</a></li>
+					<% } %>
+				</div>
+			</div>
+			<div>
+		
+
+		

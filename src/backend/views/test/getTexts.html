@@ -1,0 +1,20 @@
+<% include ../common/header.html %>
+
+<div>
+	<% 
+	let result = [];
+	if(list.length > 0){
+		for(let i = 0; i < list.length; i++) {
+			let vo = list[i];
+			result.push(vo.name);
+		}
+	}
+	%>
+	
+	test list :
+	<pre>
+		<%=result.join("\n")%>
+	</pre>
+</div>
+
+<% include ../common/footer.html %>

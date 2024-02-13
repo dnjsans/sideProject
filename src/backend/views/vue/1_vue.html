@@ -1,0 +1,137 @@
+<% include ../common/header.html %>
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<div id='top'>
+<h2>VUE</h2>
+</div>
+
+<% for(let u of users) { %>
+	<%=u.username%>
+<% } %>
+
+<div id='contents'>
+<div id='canvasContainer'>
+	태스트
+</div>
+</div>
+
+<div id='bottom'>
+
+</div>
+
+<div class="container">
+
+			<h3>액션 테스트</h3>
+			<div id="actionTest">
+				<div v-if="liked"> 좋아요 놀렀음</div>
+				<div v-if="liked === false">
+					<button v-on:click="onClickButton" class="btn btn-lg btn-success">Like</button> 
+				</div>
+<!-- 				<button v-else v-on:click="onClickButton" class="btn btn-lg btn-success">Like</button> -->
+<!--				 v-if, v-on v-else-if="liked" v-else 같이 v가 붙으면 data또는 methods에 접근 할수 있음 . -->
+			</div>
+			
+			<hr style="border:black solid 1px;" />
+			
+			<h3>구구단</h3>
+			<div id="gugudan">
+				<div > {{first}}곱하기 {{second}}은?</div>
+				<div >
+					<form v-on:submit="onSubmitForm">
+						<input type="number" ref="answer" v-model="inputVal" /> <button type="submit">{{inputVal}} 입력</button>   <!-- v-model -->
+					</form>  
+				</div>
+				<div >{{result}} </div>
+			</div>
+			
+			<hr style="border:black solid 1px;" />
+			
+			<h3>끝말 읻기</h3>
+			<div id="followWord">
+				<div > {{word}}</div>
+				<div >
+					<form v-on:submit="onSubmitForm">
+						<input type="number" ref="answer" v-model="inputVal" /> <button type="submit">{{inputVal}} 입력</button>   <!-- v-model -->
+					</form>  
+				</div>
+				<div >{{result}} </div>
+			</div>
+			
+			<hr style="border:black solid 1px;" />
+</div>
+
+			
+<script type="text/javascript">
+
+const followWord = new Vue({
+	el : '#followWord',
+	data : {
+		word:'사과',
+		inputVal : '',
+		result : ''
+	},
+	methods : {
+		onSubmitForm : function(e){
+			e.preventDefault();		//페이지 갱신 막기. 
+			if(this.word[this.word.length - 1] === this.inputVal[0]){
+				this.result = '딩동댕';
+				this.inputVal = '';
+				this.$refs.answer.focus();
+			}else{
+				this.result = '땡';
+				this.inputVal = '';
+				this.$refs.answer.focus();
+			}
+		},
+	}
+});
+
+
+const gugudan = new Vue({
+	el :'#gugudan',
+	data : {
+		first:Math.ceil(Math.random() * 9 ),
+		second: Math.ceil(Math.random() * 9 ),
+		inputVal : '',
+		result : ''
+	},
+	methods : {
+		init : function(){
+			this.first = Math.ceil(Math.random() * 9 );
+			this.second = Math.ceil(Math.random() * 9 );	
+			this.inputVal = '';
+		},
+		onSubmitForm : function(e){
+			e.preventDefault();		//페이지 갱신 막기. 
+			if(this.first * this.second === Number(this.inputVal)){
+				this.result = '정답';
+				this.init();
+				this.$refs.answer.focus();
+			}else{
+				this.result = '땡';
+				this.inputVal = '';
+				this.$refs.answer.focus();
+			}
+		},
+	}
+});
+
+
+const actionTest = new Vue({
+	el:'#actionTest',
+	data : {
+		liked : false
+	},
+	methods : {
+		onClickButton : function(){
+			this.liked = true;
+		}
+	}
+});
+
+</script>
+
+
+<% include ../common/footer.html %>
